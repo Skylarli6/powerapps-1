@@ -1,0 +1,15 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =ClearCollect(Col,"") ;
+        ClearCollect(Num, 
+            AddColumns(
+                Sequence(10), 
+                "Min", (Value - 1) * 100, 
+                "Max", Value * 100
+            )
+        );
+        ForAll(Num,
+            Collect(Col, Filter(testlist, ID < Max, ID >= Min));
+        )
+
